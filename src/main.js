@@ -1,11 +1,8 @@
-import SimpleLightbox from 'simplelightbox';
 import iziToast from 'izitoast';
-
-import 'simplelightbox/dist/simple-lightbox.min.css';
 import 'izitoast/dist/css/iziToast.min.css';
 
-import { getPicturesByUserTag } from './js/pixabay-api';
-import { renderPhotos } from './js/render-function';
+import { getPicturesByUserTag } from './js/getPicturesByUserTag';
+import { renderPhotos } from './js/renderPhotos';
 import { refs } from "./refs";
 
 
