@@ -17,7 +17,6 @@ async function onFormSubmit(e) {
 
   refs.gallery.innerHTML = '';
   refs.loadMoreBtn.classList.add('hidden');
-  refs.loader.classList.remove('hidden');
 
   userTag = e.target.elements.search.value.trim();
   page = 1;
@@ -33,6 +32,7 @@ async function onFormSubmit(e) {
 
   try {
     const data = await getPicturesByUserTag(userTag, page);
+    refs.loader.classList.remove('hidden');
     if (data.hits.length === 0) {
       iziToast.error({
         position: 'bottomCenter',
