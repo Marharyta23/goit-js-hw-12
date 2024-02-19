@@ -5,7 +5,6 @@ import { getPicturesByUserTag } from './js/getPicturesByUserTag';
 import { renderPhotos } from './js/renderPhotos';
 import { refs } from './js/refs';
 import { checkBtnStatus } from './js/checkBtnStatus';
-
 let userTag;
 let page;
 
@@ -62,11 +61,12 @@ async function onLoadMore() {
   try {
     const data = await getPicturesByUserTag(userTag, page);
     renderPhotos(data.hits);
-    refs.loader2.classList.add('hidden');
     checkBtnStatus(data, page);
+    refs.loader2.classList.add('hidden');
   } catch (err) {
     console.log(err);
   }
+
   const card = refs.gallery.firstElementChild.getBoundingClientRect();
   const { height } = card;
 
