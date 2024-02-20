@@ -9,6 +9,7 @@ export function checkBtnStatus(data, page) {
   const isLastPage = maxPage <= page;
   if (isLastPage) {
     refs.loadMoreBtn.classList.add('hidden');
+    refs.loader2.classList.add('hidden');
     iziToast.show({
       position: 'bottomCenter',
       color: 'yellow',

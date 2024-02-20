@@ -33,6 +33,8 @@ async function onFormSubmit(e) {
     const data = await getPicturesByUserTag(userTag, page);
     refs.loader.classList.remove('hidden');
     if (data.hits.length === 0) {
+      renderPhotos(data.hits);
+      refs.loader.classList.add('hidden');
       iziToast.error({
         position: 'bottomCenter',
         icon: '',
@@ -46,7 +48,13 @@ async function onFormSubmit(e) {
       checkBtnStatus(data, page);
     }
   } catch (err) {
-    console.log(err);
+    refs.loadMoreBtn.classList.add('hidden');
+    refs.loader.classList.add('hidden');
+    iziToast.error({
+      position: 'center',
+      icon: '',
+      message: `${err}`,
+    });
   }
 
   e.target.reset();
@@ -64,7 +72,13 @@ async function onLoadMore() {
     checkBtnStatus(data, page);
     refs.loader2.classList.add('hidden');
   } catch (err) {
-    console.log(err);
+    refs.loadMoreBtn.classList.add('hidden');
+    refs.loader2.classList.add('hidden');
+    iziToast.error({
+      position: 'center',
+      icon: '',
+      message: `${err}`,
+    });
   }
 
   const card = refs.gallery.firstElementChild.getBoundingClientRect();
