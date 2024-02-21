@@ -16,11 +16,13 @@ async function onFormSubmit(e) {
 
   refs.gallery.innerHTML = '';
   refs.loadMoreBtn.classList.add('hidden');
+  refs.loader.classList.remove('hidden');
 
   userTag = e.target.elements.search.value.trim();
   page = 1;
 
   if (!userTag) {
+    refs.loader.classList.add('hidden');
     iziToast.error({
       position: 'bottomCenter',
       icon: '',
@@ -31,16 +33,14 @@ async function onFormSubmit(e) {
 
   try {
     const data = await getPicturesByUserTag(userTag, page);
-    refs.loader.classList.remove('hidden');
     if (data.hits.length === 0) {
-      renderPhotos(data.hits);
-      refs.loader.classList.add('hidden');
       iziToast.error({
         position: 'bottomCenter',
         icon: '',
         message:
           'Sorry, there are no images matching your search query. Please try again!',
       });
+      refs.loader.classList.add('hidden');
       return;
     } else {
       renderPhotos(data.hits);
